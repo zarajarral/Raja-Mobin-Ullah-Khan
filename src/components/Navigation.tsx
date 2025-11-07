@@ -1,6 +1,4 @@
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { BookOpen } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const Navigation = () => {
@@ -51,10 +49,6 @@ const Navigation = () => {
             >
               Blogs
             </Link>
-            <Button variant="default" size="sm" className="animate-glow-pulse">
-              <BookOpen className="w-4 h-4 mr-2" />
-              Discover E-Book
-            </Button>
           </div>
         </div>
       </div>

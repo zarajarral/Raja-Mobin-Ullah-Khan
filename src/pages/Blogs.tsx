@@ -8,57 +8,63 @@ const Blogs = () => {
   const blogPosts = [
     {
       id: 1,
-      title: "The Architecture of Modern Coups: A Systematic Analysis",
+      slug: "western-intelligence",
+      title: "The Western Intelligence System",
       excerpt:
-        "An in-depth examination of how modern coups are planned, executed, and legitimized through media narratives and international cooperation.",
-      date: "October 15, 2025",
+        "How the Five Eyes alliance transformed from WWII codebreaking cooperation into the backbone of Western information supremacy and global surveillance.",
+      date: "November 5, 2025",
+      category: "Intelligence",
+      readTime: "15 min read",
+    },
+    {
+      id: 2,
+      slug: "selective-morality",
+      title: "Power and Principle: The West's Selective Morality",
+      excerpt:
+        "Examining the contradiction between Western promotion of democracy and human rights, and their abandonment when national interests are at stake.",
+      date: "November 4, 2025",
       category: "Geopolitics",
       readTime: "12 min read",
     },
     {
-      id: 2,
-      title: "Technology as a Tool of Geopolitical Control",
-      excerpt:
-        "Exploring how technological infrastructure, surveillance systems, and digital platforms have become instruments of power projection.",
-      date: "October 8, 2025",
-      category: "Technology",
-      readTime: "10 min read",
-    },
-    {
       id: 3,
-      title: "Educational Systems and the Manufacturing of Consent",
+      slug: "sacred-alliances",
+      title: "Sacred Alliances: West's Use of Religion as a Weapon",
       excerpt:
-        "How educational curricula in different nations shape public perception and enable or resist geopolitical narratives.",
-      date: "September 30, 2025",
-      category: "Education",
-      readTime: "15 min read",
+        "How Western powers strategically weaponized religion during the Cold War, from the Catholic Church in Poland to mujahideen in Afghanistan.",
+      date: "November 3, 2025",
+      category: "Religion & Politics",
+      readTime: "13 min read",
     },
     {
       id: 4,
-      title: "The Cold War Never Ended: Understanding Modern Proxy Conflicts",
+      slug: "weaponized-economics",
+      title: "West's Weaponized Economics: How sanctions shape and shatter nations",
       excerpt:
-        "Analyzing how the strategic thinking and operational tactics of the Cold War continue to influence contemporary international relations.",
-      date: "September 22, 2025",
-      category: "Geopolitics",
-      readTime: "14 min read",
+        "From Cuba to Iran, examining how economic sanctions became the West's preferred tool of coercion, often causing more humanitarian damage than political change.",
+      date: "November 5, 2024",
+      category: "Economics",
+      readTime: "10 min read",
     },
     {
       id: 5,
-      title: "Artificial Intelligence and the Future of Strategic Intelligence",
+      slug: "debt-dependency",
+      title: "Debt and Dependency: The Real Price of International Financial Aid",
       excerpt:
-        "The intersection of AI technology with intelligence gathering, analysis, and the changing nature of information warfare.",
-      date: "September 15, 2025",
-      category: "Technology",
+        "How the IMF and World Bank transformed from post-war reconstruction tools into instruments of Western control through structural adjustment programs and debt diplomacy.",
+      date: "November 5, 2024",
+      category: "Financial Policy",
       readTime: "11 min read",
     },
     {
       id: 6,
-      title: "Resource Wars: The New Colonialism",
+      slug: "convenient-tyrants",
+      title: "Convenient Tyrants: How Western Support for Dictators Undermined Democracy",
       excerpt:
-        "How the quest for natural resources drives modern geopolitical conflicts and shapes international policy under the guise of humanitarian intervention.",
-      date: "September 1, 2025",
-      category: "Geopolitics",
-      readTime: "13 min read",
+        "From Pinochet to Suharto, examining how Western powers systematically supported brutal dictatorships while claiming to champion democratic values worldwide.",
+      date: "November 5, 2024",
+      category: "Democracy",
+      readTime: "9 min read",
     },
   ];
 
@@ -97,11 +103,11 @@ const Blogs = () => {
       {/* Blog Posts Grid */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="max-w-7xl mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {blogPosts.map((post, index) => (
               <Link
                 key={post.id}
-                to={`/blog/${post.id}`}
+                to={`/blog/${post.slug}`}
                 className="group animate-fade-in-slow"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
