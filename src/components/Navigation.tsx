@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import logo from "@/assets/logo.png";
 
 const Navigation = () => {
   const location = useLocation();
@@ -24,8 +25,12 @@ const Navigation = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-accent flex items-center justify-center font-bold text-2xl text-background border-2 border-accent transition-all duration-300 group-hover:scale-110">
-              M
+            <div className="w-10 h-10 transition-all duration-300 group-hover:scale-110">
+              <img 
+                src={logo} 
+                alt="Mobin Geopolitics Logo" 
+                className="w-full h-full object-contain"
+              />
             </div>
             <span className="text-foreground font-semibold text-lg hidden sm:inline-block">
               Raja Mobin Ullah Khan

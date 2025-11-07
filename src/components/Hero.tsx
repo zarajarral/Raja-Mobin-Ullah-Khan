@@ -1,19 +1,39 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BookOpen } from "lucide-react";
+import { ArrowRight, BookOpen, X } from "lucide-react";
 import profileImage from "@/assets/profile.jpg";
 import worldMapBg from "@/assets/world-map-bg.jpg";
 
 const Hero = () => {
-  // Handle PDF download
-  const handleDownloadEbook = () => {
+  const [showDownloadModal, setShowDownloadModal] = useState(false);
+
+  // Handle PDF download for specific language
+  const handleDownloadEbook = (selectedLanguage: 'english' | 'urdu') => {
+    const bookContent = {
+      english: {
+        pdfFile: "/The-Western-Illusion.pdf",
+        fileName: "The-Western-Illusion.pdf",
+      },
+      urdu: {
+        pdfFile: "/The-Western-Illusion-Urdu.pdf", 
+        fileName: "فریبِ-مغرب.pdf",
+      }
+    };
+
+    const selectedBook = bookContent[selectedLanguage];
     const link = document.createElement('a');
-    link.href = '/The-Western-Illusion.pdf';
-    link.download = 'The-Western-Illusion.pdf';
+    link.href = selectedBook.pdfFile;
+    link.download = selectedBook.fileName;
     link.target = '_blank';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    setShowDownloadModal(false);
+  };
+
+  const openDownloadModal = () => {
+    setShowDownloadModal(true);
   };
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0">
@@ -66,7 +86,7 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button size="lg" className="text-lg group" onClick={handleDownloadEbook}>
+              <Button size="lg" className="text-lg group" onClick={openDownloadModal}>
                 <BookOpen className="w-5 h-5 mr-2" />
                 Get the E-Book
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
@@ -87,6 +107,67 @@ const Hero = () => {
 
       {/* Bottom gradient overlay */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+
+      {/* Download Modal */}
+      {showDownloadModal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-background border border-border rounded-lg shadow-2xl max-w-md w-full mx-4 animate-fade-in">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-border">
+              <h3 className="text-xl font-semibold text-foreground">Select Language</h3>
+              <button
+                onClick={() => setShowDownloadModal(false)}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 space-y-4">
+              <p className="text-foreground/80 mb-6">Choose your preferred language to download the e-book:</p>
+              
+              {/* English Option */}
+              <button
+                onClick={() => handleDownloadEbook('english')}
+                className="w-full p-4 rounded-lg border border-border hover:border-accent transition-all duration-200 hover:bg-accent/5 group"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-16 bg-accent/10 rounded border border-accent/20 flex items-center justify-center">
+                      <BookOpen className="w-6 h-6 text-accent" />
+                    </div>
+                    <div className="text-left">
+                      <h4 className="font-semibold text-foreground group-hover:text-accent transition-colors">English Version</h4>
+                      <p className="text-sm text-muted-foreground">The Western Illusion</p>
+                    </div>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-accent transition-all group-hover:translate-x-1" />
+                </div>
+              </button>
+
+              {/* Urdu Option */}
+              <button
+                onClick={() => handleDownloadEbook('urdu')}
+                className="w-full p-4 rounded-lg border border-border hover:border-accent transition-all duration-200 hover:bg-accent/5 group"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-16 bg-accent/10 rounded border border-accent/20 flex items-center justify-center">
+                      <BookOpen className="w-6 h-6 text-accent" />
+                    </div>
+                    <div className="text-left">
+                      <h4 className="font-semibold text-foreground group-hover:text-accent transition-colors">اردو ورژن</h4>
+                      <p className="text-sm text-muted-foreground" style={{ direction: 'rtl' }}>فریبِ مغرب</p>
+                    </div>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-accent transition-all group-hover:translate-x-1" />
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
